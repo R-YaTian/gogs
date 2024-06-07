@@ -121,6 +121,16 @@ func NewRepoContext() {
 		log.Fatal("Failed to get Git version: %v", err)
 	}
 
+	// Replace Username if running on Windows
+	gitArg := "--global"
+	dir := "--no-comment"
+	if conf.IsWindowsRuntime() && conf.HasMinWinSvc {
+		dir = filepath.Join("home", conf.App.RunUser, ".gitconfig")
+		dir = strings.ReplaceAll(dir, "\\", "/")
+		dir = "/" + dir
+		gitArg = "--file"
+	}
+
 	log.Trace("Git version: %s", conf.Git.Version)
 	if semverutil.Compare(conf.Git.Version, "<", "1.8.3") {
 		log.Fatal("Gogs requires Git version greater or equal to 1.8.3")
@@ -128,10 +138,10 @@ func NewRepoContext() {
 
 	// Git requires setting user.name and user.email in order to commit changes.
 	for configKey, defaultValue := range map[string]string{"user.name": "Gogs", "user.email": "gogs@fake.local"} {
-		if stdout, stderr, err := process.Exec("NewRepoContext(get setting)", "git", "config", "--get", configKey); err != nil || strings.TrimSpace(stdout) == "" {
+		if stdout, stderr, err := process.Exec("NewRepoContext(get setting)", "git", "config", gitArg, dir, "--get", configKey); err != nil || strings.TrimSpace(stdout) == "" {
 			// ExitError indicates this config is not set
 			if _, ok := err.(*exec.ExitError); ok || strings.TrimSpace(stdout) == "" {
-				if _, stderr, gerr := process.Exec("NewRepoContext(set "+configKey+")", "git", "config", "--global", configKey, defaultValue); gerr != nil {
+				if _, stderr, gerr := process.Exec("NewRepoContext(set "+configKey+")", "git", "config", gitArg, dir, configKey, defaultValue); gerr != nil {
 					log.Fatal("Failed to set git %s(%s): %s", configKey, gerr, stderr)
 				}
 				log.Info("Git config %s set to %s", configKey, defaultValue)
@@ -143,7 +153,7 @@ func NewRepoContext() {
 
 	// Set git some configurations.
 	if _, stderr, err := process.Exec("NewRepoContext(git config --global core.quotepath false)",
-		"git", "config", "--global", "core.quotepath", "false"); err != nil {
+		"git", "config", gitArg, dir, "core.quotepath", "false"); err != nil {
 		log.Fatal("Failed to execute 'git config --global core.quotepath false': %v - %s", err, stderr)
 	}
 
