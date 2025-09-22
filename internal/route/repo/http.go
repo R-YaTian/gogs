@@ -300,7 +300,7 @@ func gitCommand(dir string, args ...string) []byte {
 	cmd.Dir = dir
 	out, err := cmd.Output()
 	if err != nil {
-		log.Error(fmt.Sprintf("Git: %v - %s", err, out))
+		log.Error("Git: %v - %s", err, out)
 	}
 	return out
 }
@@ -411,6 +411,7 @@ func HTTP(c *HTTPContext) {
 			return
 		}
 
+		// 🚨 SECURITY: Prevent path traversal.
 		cleaned := pathutil.Clean(m[1])
 		if m[1] != "/"+cleaned {
 			c.Error(http.StatusBadRequest, "Request path contains suspicious characters")

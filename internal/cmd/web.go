@@ -107,19 +107,20 @@ func newMacaron() *macaron.Macaron {
 		conf.Picture.RepositoryAvatarUploadPath,
 		macaron.StaticOptions{
 			ETag:        true,
-			Prefix:      database.REPO_AVATAR_URL_PREFIX,
+			Prefix:      database.RepoAvatarURLPrefix,
 			SkipLogging: conf.Server.DisableRouterLog,
 		},
 	))
 
+	customDir := filepath.Join(conf.CustomDir(), "templates")
 	renderOpt := macaron.RenderOptions{
 		Directory:         filepath.Join(conf.WorkDir(), "templates"),
-		AppendDirectories: []string{filepath.Join(conf.CustomDir(), "templates")},
+		AppendDirectories: []string{customDir},
 		Funcs:             template.FuncMap(),
 		IndentJSON:        macaron.Env != macaron.PROD,
 	}
 	if !conf.Server.LoadAssetsFromDisk {
-		renderOpt.TemplateFileSystem = templates.NewTemplateFileSystem("", renderOpt.AppendDirectories[0])
+		renderOpt.TemplateFileSystem = templates.NewTemplateFileSystem("", customDir)
 	}
 	m.Use(macaron.Renderer(renderOpt))
 

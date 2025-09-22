@@ -1,8 +1,8 @@
 ![gogs-brand](https://user-images.githubusercontent.com/2946214/146899259-6a8b58ad-8d6e-40d2-ab02-79dc6aadabbf.png)
 
-[![GitHub Workflow Status](https://img.shields.io/github/checks-status/gogs/gogs/main?logo=github&style=for-the-badge)](https://github.com/gogs/gogs/actions?query=branch%3Amain) [![Discord](https://img.shields.io/discord/382595433060499458.svg?style=for-the-badge&logo=discord)](https://discord.gg/9aqdHU7) [![Sourcegraph](https://img.shields.io/badge/view%20on-Sourcegraph-brightgreen.svg?style=for-the-badge&logo=sourcegraph)](https://sourcegraph.com/github.com/gogs/gogs)
+[![GitHub Workflow Status](https://img.shields.io/github/checks-status/gogs/gogs/main?logo=github&style=for-the-badge)](https://github.com/gogs/gogs/actions?query=branch%3Amain) [![Sourcegraph](https://img.shields.io/badge/view%20on-Sourcegraph-brightgreen.svg?style=for-the-badge&logo=sourcegraph)](https://sourcegraph.com/github.com/gogs/gogs)
 
-[简体中文](README_ZH.md)
+👉 Deploy on DigitalOcean and [get $200 in free credits](https://m.do.co/c/5aeb02268b55)!
 
 ## 🔮 Vision
 
@@ -31,7 +31,7 @@ The Gogs (`/gɑgz/`) project aims to build a simple, stable and extensible self-
 - Jupyter Notebook and PDF rendering.
 - Authentication via SMTP, LDAP, reverse proxy, GitHub.com and GitHub Enterprise with 2FA.
 - Customize HTML templates, static files and many others.
-- Rich database backend, including PostgreSQL, MySQL, SQLite3 and [TiDB](https://github.com/pingcap/tidb).
+- Rich database backend support, including PostgreSQL, MySQL, SQLite3 or any database backend that speaks one of those protocols.
 - Have localization over [31 languages](https://crowdin.com/project/gogs).
 
 ## 💾 Hardware requirements
@@ -60,11 +60,7 @@ There are 6 ways to install Gogs:
 ### Deploy to cloud
 
 - [Cloudron](https://www.cloudron.io/store/io.gogs.cloudronapp.html)
-- [Sandstorm](https://github.com/cem/gogs-sandstorm)
-- [sloppy.io](https://github.com/sloppyio/quickstarters/tree/master/gogs)
 - [YunoHost](https://github.com/YunoHost-Apps/gogs_ynh)
-- [DPlatform](https://github.com/DFabric/DPlatform-Shell)
-- [LunaNode](https://github.com/LunaNode/launchgogs)
 - [alwaysdata](https://www.alwaysdata.com/en/marketplace/gogs/)
 
 ### Tutorials
@@ -81,7 +77,6 @@ There are 6 ways to install Gogs:
 
 ## 📦 Software, service and product support
 
-- [Fabric8](http://fabric8.io/) (DevOps)
 - [Jenkins](https://plugins.jenkins.io/gogs-webhook/) (CI)
 - [Puppet](https://forge.puppet.com/modules/Siteminds/gogs) (IT)
 - [Synology](https://www.synology.com) (Docker)
@@ -89,9 +84,9 @@ There are 6 ways to install Gogs:
 
 ## 🙇‍♂️ Acknowledgments
 
-<p>This project is proundly supported by:</p>
+<p>This project is proudly supported by:</p>
 <p>
-  <a href="https://www.digitalocean.com/">
+  <a href="https://m.do.co/c/5aeb02268b55">
     <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/SVG/DO_Logo_horizontal_blue.svg" width="201px">
   </a>
 </p>
@@ -100,7 +95,6 @@ Other acknowledgments:
 
 - Thanks [Egon Elbre](https://twitter.com/egonelbre) for designing the original version of the logo.
 - Thanks [Crowdin](https://crowdin.com/project/gogs) for sponsoring open source translation plan.
-- Thanks [MonoVM](https://monovm.com/linux-vps/) for sponsoring VPS services.
 - Thanks [Buildkite](https://buildkite.com) for sponsoring open source CI/CD plan.
 
 ## 👋 Contributors
