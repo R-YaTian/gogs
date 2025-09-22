@@ -13,6 +13,7 @@ import (
 	"path/filepath"
 	"strings"
 	"syscall"
+	"runtime"
 
 	"github.com/pkg/errors"
 	"github.com/sourcegraph/run"
@@ -186,6 +187,9 @@ func setupHostKeys(appDataPath string, algorithms []string) ([]ssh.Signer, error
 	var hostKeys []ssh.Signer
 	for _, algo := range algorithms {
 		keyPath := filepath.Join(dir, "gogs."+algo)
+		if runtime.GOOS == "windows" {
+			keyPath = strings.ReplaceAll(keyPath, "\\", "/")
+		}
 		if !osutil.IsExist(keyPath) {
 			args := []string{
 				conf.SSH.KeygenPath,
